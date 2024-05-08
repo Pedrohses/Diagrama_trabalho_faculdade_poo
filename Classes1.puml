@@ -1,5 +1,6 @@
 @startuml Concessionaria
 
+!define SYSTEM_STYLE_CLASSIC
 abstract class Veiculo {
     - modelo: String
     - marca: String
@@ -32,9 +33,12 @@ class Moto {
     - tipoPartida: String
 }
 
-class Concessionaria {
-    - veiculos: ArrayList<Veiculo>
-    + main(args: String[]): void
+class GerenciadorDeDados {
+    - dados: ArrayList<Veiculo>
+    + cadastrar(objeto: Veiculo): void
+    + editar(objeto: Veiculo): void
+    + consultar(): ArrayList<Veiculo>
+    + remover(objeto: Veiculo): void
 }
 
 Veiculo <|-- Carro
@@ -43,3 +47,18 @@ Veiculo <|-- Moto
 
 @enduml
 
+
+@startuml teste
+left to right direction
+actor Usuario as user
+rectangle Sistema {
+    usecase (Cadastrar Item) as cadastrar
+    usecase (Editar Item) as editar
+    usecase (Consultar Item) as consultar
+    usecase (Remover Item) as remover
+}
+user --> cadastrar
+user --> editar
+user --> consultar
+user --> remover
+@enduml
